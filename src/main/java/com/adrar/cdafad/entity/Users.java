@@ -1,9 +1,13 @@
 package com.adrar.cdafad.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
+
+import java.sql.Date;
 
 @Entity
 @Table(name="utilisateur")
+@Data
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
