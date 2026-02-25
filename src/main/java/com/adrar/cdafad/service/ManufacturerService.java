@@ -1,10 +1,6 @@
 package com.adrar.cdafad.service;
 
 import com.adrar.cdafad.entity.Manufacturer;
-import com.adrar.cdafad.exception.manufacturer.ManufacturerIsNotExistsException;
-import com.adrar.cdafad.exception.manufacturer.ManufacturerIsPresentException;
-import com.adrar.cdafad.exception.manufacturer.ManufacturerListIsEmptyException;
-import com.adrar.cdafad.exception.manufacturer.DeleteManufacturerImpossibleException;
 import com.adrar.cdafad.repository.ManufacturerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,44 +14,33 @@ public class ManufacturerService {
     private ManufacturerRepository manufacturerRepository;
 
     //Méthodes du service
-    //Méthode qui ajoute une manufacturer
-    public Manufacturer createManufacturer(Manufacturer manufacturer)  {
+    //Méthode qui ajoute un Manufacturer
+    public Manufacturer createManufacturer(Manufacturer manufacturer) throws Exception {
 
-        if(manufacturerRepository.findByName(manufacturer.getName()).isPresent()) {
-            throw new ManufacturerIsPresentException(manufacturer.getName());
+        if(this.manufacturerRepository.existsByName(manufacturer.getName())) {
+            throw new Exception("Le Manufacturer avec le  name " + manufacturer.getName() + " existe déja");
         }
-
         return manufacturerRepository.save(manufacturer);
     }
 
-    //Méthode qui retourne une manufacturer par son ID
-    public Manufacturer getManufacturerById(Integer id){
-        //Récupération de la manufacturer (findById du repository)
+    //Méthode pour récupérer un Manufacturer
+    public Manufacturer getManufacturerById(Integer id) throws Exception
+    {
         Optional<Manufacturer> manufacturer = manufacturerRepository.findById(id);
-        //Test si elle n'existe pas
-        if (!manufacturer.isPresent()) {
-            throw new ManufacturerIsNotExistsException(id);
+        //Test si il n'existe pas
+        if (manufacturer.isEmpty()) {
+            throw new Exception("Le Manufacturer n'existe pas");
         }
         return manufacturer.get();
     }
 
-    //méthode qui retourne la liste de toutes les manufacturers
-    public Iterable<Manufacturer> getAllCategories()  {
-        //Test si la list est vide
-        if (manufacturerRepository.count() == 0) {
-            throw new ManufacturerListIsEmptyException();
+    //Méthode pour récupérer la liste des Manufacturer
+    public Iterable<Manufacturer> getAllManufacturers() throws Exception
+    {
+        //Test si la liste est vide
+        if (this.manufacturerRepository.count() == 0) {
+            throw new Exception("La liste des Manufacturer est vide");
         }
         return manufacturerRepository.findAll();
-    }
-
-
-    public void deleteManufacturerById(Integer id)
-    {
-        try {
-            this.manufacturerRepository.deleteById(id);
-        } catch (Exception e)
-        {
-            throw new DeleteManufacturerImpossibleException();
-        }
     }
 }

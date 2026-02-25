@@ -12,4 +12,6 @@ import java.util.Optional;
 public interface ManufacturerRepository extends CrudRepository<Manufacturer, Integer> {
     public boolean existsByName(String name);
     Optional<Manufacturer> findByName(String name);
+    Optional<Manufacturer> findById(Integer id);
+
 }
