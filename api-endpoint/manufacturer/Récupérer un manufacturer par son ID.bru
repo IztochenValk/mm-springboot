@@ -1,16 +1,15 @@
 meta {
-  name: Route de test
+  name: Récupérer un manufacturer par son ID
   type: http
   seq: 1
 }
 
 get {
-  url: http://127.0.0.1:9000/api/test
+  url: http://127.0.0.1:9000/api/manufacturer/1
   body: none
   auth: inherit
 }
 
 settings {
   encodeUrl: true
-  timeout: 0
 }

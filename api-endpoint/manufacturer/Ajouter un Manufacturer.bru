@@ -1,0 +1,22 @@
+meta {
+  name: Ajouter un Manufacturer
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://127.0.0.1:9000/api/manufacturer
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name":"Nintendo"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

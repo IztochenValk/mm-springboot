@@ -1,0 +1,15 @@
+meta {
+  name: Récupérer la liste des manufacturer
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://127.0.0.1:9000/api/manufacturers
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}
