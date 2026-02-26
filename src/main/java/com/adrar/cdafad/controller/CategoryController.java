@@ -4,6 +4,7 @@ import com.adrar.cdafad.entity.Category;
 import com.adrar.cdafad.exception.category.CategoryIsPresentException;
 import com.adrar.cdafad.repository.CategoryRepository;
 import com.adrar.cdafad.service.CategoryService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;

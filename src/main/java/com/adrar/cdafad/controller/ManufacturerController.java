@@ -2,6 +2,7 @@ package com.adrar.cdafad.controller;
 
 import com.adrar.cdafad.entity.Manufacturer;
 import com.adrar.cdafad.service.ManufacturerService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +16,7 @@ public class ManufacturerController {
     private ManufacturerService manufacturerService;
 
     @GetMapping("/manufacturer/{id}")
-    public ResponseEntity<Manufacturer> getManufacturer(@PathVariable Integer id) throws  Exception
-    {
+    public ResponseEntity<Manufacturer> getManufacturer(@PathVariable Integer id) throws Exception {
         Manufacturer manufacturer = manufacturerService.getManufacturerById(id);
         return new ResponseEntity<>(manufacturer, HttpStatus.OK);
     }
