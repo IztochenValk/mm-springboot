@@ -6,10 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +22,7 @@ public class Game {
     @Column(length = 255)
     private String description;
     @Column(name = "publish_at")
+    @Temporal(TemporalType.DATE)
     private Date publishAt;
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "manufacturer_id")
@@ -27,5 +31,5 @@ public class Game {
     @JoinTable(name = "game_category",
     joinColumns = @JoinColumn( name = "game_id" ),
     inverseJoinColumns = @JoinColumn( name = "category_id" ) )
-    private ArrayList<Category> categories = new ArrayList<>();
+    private List<Category> categories = new ArrayList<>();
 }
