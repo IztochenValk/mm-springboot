@@ -1,5 +1,6 @@
 package com.adrar.cdafad.controller;
 
+import com.adrar.cdafad.dto.CategoryDTO;
 import com.adrar.cdafad.entity.Category;
 import com.adrar.cdafad.exception.category.CategoryIsPresentException;
 import com.adrar.cdafad.repository.CategoryRepository;
@@ -60,5 +61,11 @@ public class CategoryController {
         response.put("status", "OK");
         response.put("info", "La category à été supprimé");
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/category/{id}/dto")
+    public ResponseEntity<CategoryDTO> getCategoryDTOById(@PathVariable Integer id)
+    {
+        return new ResponseEntity<>(this.categoryService.getCategoryDTOById(id), HttpStatus.OK);
     }
 }

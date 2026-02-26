@@ -1,5 +1,7 @@
 package com.adrar.cdafad.service;
 
+import com.adrar.cdafad.dto.CategoryDTO;
+import com.adrar.cdafad.dto.CategoryDTOWrapper;
 import com.adrar.cdafad.entity.Category;
 import com.adrar.cdafad.exception.category.CategoryIsNotExistsException;
 import com.adrar.cdafad.exception.category.CategoryIsPresentException;
@@ -57,5 +59,13 @@ public class CategoryService {
         {
             throw new DeleteCategoryImpossibleException();
         }
+    }
+
+    public CategoryDTO getCategoryDTOById(Integer id)
+    {
+        return CategoryDTOWrapper
+                .wrapCategoryToCategoryDTO(
+                        this.getCategoryById(id)
+                );
     }
 }
