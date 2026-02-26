@@ -1,9 +1,11 @@
 package com.adrar.cdafad.repository;
 
 import com.adrar.cdafad.entity.Users;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
-public interface UsersRepository extends CrudRepository<Users, Integer> {
+import java.util.Optional;
+
+public interface UsersRepository extends JpaRepository<Users, Integer> {
+    Optional<Users> findByEmail(String email);
+    boolean existsByEmail(String email);
 }
